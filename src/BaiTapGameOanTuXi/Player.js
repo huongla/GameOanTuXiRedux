@@ -34,7 +34,7 @@ class Player extends Component {
       <div className="playerGame">
         <div className="theThink">
           <img
-            className="mt-3"
+            className="mt-4"
             src={
               Object.values(this.props.objectDatCuoc).find(
                 (item) => item.betting === true

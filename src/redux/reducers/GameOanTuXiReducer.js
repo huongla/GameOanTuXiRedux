@@ -3,7 +3,7 @@ const stateDefault = {
     0: {
       id: "bao",
       gameImage: "./img/gameOanTuXi/bao.png",
-      betting: true,
+      betting: false,
     },
     1: {
       id: "bua",
@@ -13,7 +13,7 @@ const stateDefault = {
     2: {
       id: "keo",
       gameImage: "./img/gameOanTuXi/keo.png",
-      betting: false,
+      betting: true,
     },
   },
   computer: {

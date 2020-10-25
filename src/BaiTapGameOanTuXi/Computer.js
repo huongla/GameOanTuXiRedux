@@ -16,7 +16,7 @@ class Computer extends Component {
           <img
             style={{
               position: "absolute",
-              left: "25%",
+              left: "33%",
               animation: `randomItem${Date.now()} 0.5s`,
               transform: "rotate(120deg)",
             }}
