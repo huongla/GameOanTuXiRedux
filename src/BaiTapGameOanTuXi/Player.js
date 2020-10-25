@@ -2,56 +2,60 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Player extends Component {
+  renderDSGame = () => {
+    let { objectDatCuoc } = this.props;
+
+    return Object.values(objectDatCuoc).map((obj, index) => {
+      let border = {};
+      if (obj.betting) {
+        border = { border: "3px solid orange" };
+      }
+      return (
+        <div className="col-4" key={index}>
+          <button
+            style={border}
+            className="btnItem"
+            onClick={() => this.props.bet(obj.id)}
+          >
+            <img
+              width={35}
+              height={35}
+              src={obj.gameImage}
+              alt={obj.gameImage}
+            />
+          </button>
+        </div>
+      );
+    });
+  };
+
   render() {
     return (
-      <div className="text-center playerGame">
+      <div className="playerGame">
         <div className="theThink">
           <img
             className="mt-3"
-            width={50}
-            height={50}
             src={
-              this.props.mangDatCuoc.find((item) => item.datCuoc === true)
-                .hinhAnh
+              Object.values(this.props.objectDatCuoc).find(
+                (item) => item.betting === true
+              ).gameImage
             }
             alt={
-              this.props.mangDatCuoc.find((item) => item.datCuoc === true)
-                .hinhAnh
+              Object.values(this.props.objectDatCuoc).find(
+                (item) => item.betting === true
+              ).gameImage
             }
+            width={35}
+            height={35}
           />
         </div>
         <div className="speech-bubble"></div>
         <img
           src="./img/gameOanTuXi/player.png"
           alt="./img/gameOanTuXi/player.png"
-          style={{ width: 200, height: 200 }}
+          width={200}
         />
-
-        <div className="row">
-          {this.props.mangDatCuoc.map((item, index) => {
-            let border = {};
-            if (item.datCuoc) {
-              border = { border: "3px solid orange" };
-            }
-
-            return (
-              <div className="col-4" key={index}>
-                <button
-                  style={border}
-                  className="btnItem"
-                  onClick={() => this.props.datCuoc(item.ma)}
-                >
-                  <img
-                    width={35}
-                    height={35}
-                    src={item.hinhAnh}
-                    alt={item.hinhAnh}
-                  />
-                </button>
-              </div>
-            );
-          })}
-        </div>
+        <div className="row">{this.renderDSGame()}</div>
       </div>
     );
   }
@@ -59,19 +63,19 @@ class Player extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    mangDatCuoc: state.GameOanTuXiReducer.mangDatCuoc,
+    objectDatCuoc: state.GameOanTuXiReducer.objectDatCuoc,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    datCuoc: (maCuoc) => {
+    bet: (bettingId) => {
       const action = {
-        type: "DAT_CUOC",
-        maCuoc,
+        type: "BET",
+        bettingId,
       };
       dispatch(action);
     },
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

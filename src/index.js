@@ -11,9 +11,6 @@ import { rootReducer } from "./redux/reducers/rootReducer";
 const store = createStore(rootReducer);
 
 ReactDOM.render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>,
   <Provider store={store}>
     <App />
   </Provider>,

@@ -18,6 +18,8 @@
     height: 100px;
 	background: #fff;
 	border-radius: 10px;
+	justify-content: center;
+	align-items: center;
 	
 }
 .playerGame{

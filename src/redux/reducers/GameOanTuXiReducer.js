@@ -1,74 +1,103 @@
 const stateDefault = {
-  mangDatCuoc: [
-    { ma: "keo", hinhAnh: "./img/gameOanTuXi/keo.png", datCuoc: false },
-    { ma: "bua", hinhAnh: "./img/gameOanTuXi/bua.png", datCuoc: true },
-    { ma: "bao", hinhAnh: "./img/gameOanTuXi/bao.png", datCuoc: false },
-  ],
-  ketQua: "I'm iron man, I love you 3000!!!",
-  soBanThang: 0,
-  soBanChoi: 0,
-  computer: { ma: "keo", hinhAnh: "./img/gameOanTuXi/keo.png" },
+  objectDatCuoc: {
+    0: {
+      id: "bao",
+      gameImage: "./img/gameOanTuXi/bao.png",
+      betting: true,
+    },
+    1: {
+      id: "bua",
+      gameImage: "./img/gameOanTuXi/bua.png",
+      betting: false,
+    },
+    2: {
+      id: "keo",
+      gameImage: "./img/gameOanTuXi/keo.png",
+      betting: false,
+    },
+  },
+  computer: {
+    id: "keo",
+    gameImage: "./img/gameOanTuXi/keo.png",
+  },
+  result: "I'm iron man, I love you 3000!!!",
+  score: 0,
+  round: 0,
 };
 
 const GameOanTuXiReducer = (state = stateDefault, action) => {
   switch (action.type) {
-    case "DAT_CUOC": {
-      let mangCuocUpdate = [...state.mangDatCuoc];
-      mangCuocUpdate = mangCuocUpdate.map((item, index) => {
-        if (item.ma === action.maCuoc) {
-          return { ...item, datCuoc: true };
-        }
-        return { ...item, datCuoc: false };
-      });
-      state.mangDatCuoc = mangCuocUpdate;
-      return { ...state };
-    }
     case "RANDOM": {
-      let soNgauNhien = Math.floor(Math.random() * 3);
-      let cuocNgauNhien = state.mangDatCuoc[soNgauNhien];
-      state.computer = cuocNgauNhien;
+      let randomNumber = Math.floor(Math.random() * 3);
+
+      let randomComputerBeat = state.objectDatCuoc[randomNumber];
+
+      state.computer = randomComputerBeat;
+
       return { ...state };
     }
-    case "END_GAME":
-      state.soBanChoi += 1;
-      let player = state.mangDatCuoc.find((item) => item.datCuoc === true);
+
+    case "BET": {
+      const betId = action.bettingId;
+      let objectDatCuocUpdate = { ...state.objectDatCuoc };
+
+      objectDatCuocUpdate = Object.values(objectDatCuocUpdate).map(
+        (obj, index) => {
+          if (obj.id === betId) {
+            return { ...obj, betting: true };
+          } else {
+            return { ...obj, betting: false };
+          }
+        }
+      );
+      state.objectDatCuoc = objectDatCuocUpdate;
+      return { ...state };
+    }
+
+    case "END_GAME": {
+      state.round += 1;
+      let player = Object.values(state.objectDatCuoc).find(
+        (item) => item.betting === true
+      );
       let computer = state.computer;
-      switch (player.ma) {
-        case "keo":
-          if (computer.ma === "keo") {
-            state.ketQua = "Hòa nhau !!!";
-          } else if (computer.ma === "bao") {
-            state.soBanThang += 1;
-            state.ketQua = "I'm iron man, I love you 3000!!!";
-          } else if (computer.ma === "bua") {
-            state.ketQua = "Thua sml";
+      console.log("player", player);
+      console.log("computer", computer);
+      switch (player.id) {
+        case "bao":
+          if (computer.id === "bua") {
+            state.score += 1;
+            state.result = "I'm iron man, I love you 3000!!!";
+          } else if ((computer.id = "keo")) {
+            state.result = "Bạn thua sml";
+          } else if (computer.id === "bao") {
+            state.result = "Hòa nhau";
           }
           break;
         case "bua":
-          if (computer.ma === "keo") {
-            state.soBanThang += 1;
-            state.ketQua = "I'm iron man, I love you 3000!!!";
-          } else if (computer.ma === "bao") {
-            state.ketQua = "Thua sml";
-          } else if (computer.ma === "bua") {
-            state.ketQua = "Hòa nhau !!!";
+          if (computer.id === "keo") {
+            state.score += 1;
+            state.result = "I'm iron man, I love you 3000!!!";
+          } else if (computer.id === "bao") {
+            state.result = "Bạn thua sml";
+          } else if (computer.id === "bua") {
+            state.result = "Hòa nhau";
           }
           break;
-        case "bao":
-          if (computer.ma === "keo") {
-            state.ketQua = "Thua sml";
-          } else if (computer.ma === "bao") {
-            state.ketQua = "Hòa nhau !!!";
-          } else if (computer.ma === "bua") {
-            state.soBanThang += 1;
-            state.ketQua = "I'm iron man, I love you 3000!!!";
+        case "keo":
+          if (computer.id === "bao") {
+            state.score += 1;
+            state.result = "I'm iron man, I love you 3000!!!";
+          } else if (computer.id === "bua") {
+            state.result = "Bạn thua sml";
+          } else if (computer.id === "keo") {
+            state.result = "Hòa nhau";
           }
           break;
         default:
-          state.soBanThang += 1;
-          state.ketQua = "I'm iron man, I love you 3000!!!";
+          state.score += 1;
+          state.result = "I'm iron man, I love you 3000!!!";
       }
-      return { ...state };
+    }
 
     default:
       return { ...state };
