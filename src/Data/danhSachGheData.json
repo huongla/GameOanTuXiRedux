@@ -147,38 +147,6 @@
         {"soGhe":"H11","gia":75000,"daDat":false},
         {"soGhe":"H12","gia":75000,"daDat":false}
       ] 
-    },{
-      "hang": "I", 
-      "danhSachGhe": [
-        {"soGhe":"I1","gia":75000,"daDat":false},
-        {"soGhe":"I2","gia":75000,"daDat":false},
-        {"soGhe":"I3","gia":75000,"daDat":false},
-        {"soGhe":"I4","gia":75000,"daDat":false},
-        {"soGhe":"I5","gia":75000,"daDat":false},
-        {"soGhe":"I6","gia":75000,"daDat":false},
-        {"soGhe":"I7","gia":75000,"daDat":false},
-        {"soGhe":"I8","gia":75000,"daDat":false},
-        {"soGhe":"I9","gia":75000,"daDat":false},
-        {"soGhe":"I10","gia":75000,"daDat":false},
-        {"soGhe":"I11","gia":75000,"daDat":false},
-        {"soGhe":"I12","gia":75000,"daDat":false}
-      ] 
-    },{
-      "hang": "J", 
-      "danhSachGhe": [
-        {"soGhe":"J1","gia":75000,"daDat":false},
-        {"soGhe":"J2","gia":75000,"daDat":false},
-        {"soGhe":"J3","gia":75000,"daDat":false},
-        {"soGhe":"J4","gia":75000,"daDat":false},
-        {"soGhe":"J5","gia":75000,"daDat":false},
-        {"soGhe":"J6","gia":75000,"daDat":false},
-        {"soGhe":"J7","gia":75000,"daDat":false},
-        {"soGhe":"J8","gia":75000,"daDat":false},
-        {"soGhe":"J9","gia":75000,"daDat":false},
-        {"soGhe":"J10","gia":75000,"daDat":false},
-        {"soGhe":"J11","gia":75000,"daDat":false},
-        {"soGhe":"J12","gia":75000,"daDat":false}
-      ] 
     }
   
   ]
